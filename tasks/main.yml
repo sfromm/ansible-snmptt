@@ -1,0 +1,30 @@
+---
+- name: include os-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: install snmptt for redhat family
+  yum: name=snmptt state=installed
+  when: ansible_os_family == "RedHat"
+
+- name: template snmptt.ini
+  template: >
+    src=snmptt.ini.j2
+    dest=/etc/snmp/snmptt.ini
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+  notify: restart snmptt
+
+- name: template snmptt events
+  template: >-
+    src=snmptt.conf.j2
+    dest={{ snmptt_trap_file }}
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+  notify: restart snmptt
+
+- name: enable and start snmptt
+  service: name=snmptt enabled=yes state=started

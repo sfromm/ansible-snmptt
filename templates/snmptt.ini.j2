@@ -1,0 +1,68 @@
+# Managed by ansible
+
+[General]
+mode = {{ snmptt_mode }}
+multiple_event = {{ snmptt_multiple_event|int }}
+dns_enable = {{ snmptt_dns_enable|int }}
+strip_domain = {{ snmptt_strip_domain }}
+strip_domain_list = <<END
+{% for n in snmptt_strip_domain_list %}
+{{ n }}
+{% endfor %}
+END
+resolve_value_ip_addresses = {{ snmptt_resolve_value_ip_addresses|int }}
+net_snmp_perl_enable = {{ snmptt_net_snmp_perl_enable|int }}
+net_snmp_perl_cache_enable = {{ snmptt_net_snmp_perl_cache_enable|int }}
+net_snmp_perl_best_guess = {{ snmptt_net_snmp_perl_best_guess|int }}
+translate_log_trap_oid = {{ snmptt_translate_log_trap_oid }}
+translate_value_oids = {{ snmptt_translate_value_oids }}
+translate_enterprise_oid_format = {{ snmptt_translate_enterprise_oid_format }}
+translate_trap_oid_format = {{ snmptt_translate_trap_oid_format }}
+translate_varname_oid_format = {{ snmptt_translate_varname_oid_format }}
+translate_integers = {{ snmptt_translate_integers|int }}
+wildcard_expansion_separator = " "
+allow_unsafe_regex = 0
+remove_backslash_from_quotes = 0
+dynamic_nodes = {{ snmptt_dynamic_nodes|int }}
+description_mode = {{ snmptt_description_mode }}
+description_clean = 1
+threads_enable = {{ snmptt_threads_enable|int }}
+threads_max = {{ snmptt_threads_max }}
+
+[DaemonMode]
+daemon_fork = {{ snmptt_daemon_fork|int }}
+daemon_uid = {{ snmptt_daemon_uid }}
+spool_directory = {{ snmptt_spool_directory }}
+sleep = {{ snmptt_sleep }}
+use_trap_time = {{ snmptt_use_trap_time|int }}
+
+[Logging]
+stdout_enable = {{ snmptt_stdout_enable|int }}
+log_enable = {{ snmptt_log_enable|int }}
+log_file = {{ snmptt_log_file }}
+log_system_enable = {{ snmptt_log_system_enable|int }}
+log_system_file = {{ snmptt_log_system_file }}
+unknown_trap_log_enable = {{ snmptt_unknown_trap_log_enable|int }}
+unknown_trap_log_file = {{ snmptt_unknown_trap_log_file }}
+statistics_interval = {{ snmptt_statistics_interval }}
+syslog_enable = {{ snmptt_syslog_enable|int }}
+syslog_level = {{ snmptt_syslog_level }}
+syslog_facility = {{ snmptt_syslog_facility }}
+syslog_system_enable = {{ snmptt_syslog_system_enable|int }}
+syslog_system_level = {{ snmptt_syslog_system_level }}
+syslog_system_facility = {{ snmptt_syslog_system_facility }}
+
+[Exec]
+exec_enable = {{ snmptt_exec_enable|int }}
+pre_exec_enable = {{ snmptt_pre_exec_enable|int }}
+exec_escape = {{ snmptt_exec_escape|int }}
+
+[Debugging]
+DEBUGGING = 0
+DEBUGGING_FILE = {{ snmptt_debugging_file }}
+DEBUGGING_FILE_HANDLER = {{ snmptt_debugging_file_handler }}
+
+[TrapFiles]
+snmptt_conf_files = <<END
+{{ snmptt_trap_file }}
+END
